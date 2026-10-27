@@ -5,8 +5,8 @@ import os
 import signal
 import sys
 import threading
-import subprocess
-from pathlib import Path
+from wake_captured import build_payload
+from wake_session import WakeSession
 import dbus
 import dbus.service
 import dbus.mainloop.glib
@@ -174,6 +174,30 @@ class Advertisement(Node):
         print('Rozgłaszanie zakończone.', flush=True)
 
 
+class WakeAdvertisement(Node):
+    def __init__(self, bus):
+        self.session = None
+        super().__init__(bus, ROOT + '_wake', AD, {
+            'Type': 'peripheral',
+            'ServiceUUIDs': dbus.Array(['1812'], signature='s'),
+            'LocalName': 'MI RC',
+            'Discoverable': dbus.Boolean(True),
+            'DiscoverableTimeout': dbus.UInt16(8),
+            # BlueZ 5.85 rejects an empty manufacturer byte array. Preserve
+            # the captured 00 01 prefix and append one zero padding byte.
+            'ManufacturerData': dbus.Dictionary(
+                {dbus.UInt16(0x0100): byte_array(b'\x00')}, signature='qv'),
+            'Data': dbus.Dictionary(
+                {dbus.Byte(0xfe): byte_array(build_payload(TARGET)[-3:])}, signature='yv'),
+            'MinInterval': dbus.UInt32(30),
+            'MaxInterval': dbus.UInt32(30)})
+
+    @dbus.service.method(AD)
+    def Release(self):
+        if self.session is not None:
+            self.session.released()
+
+
 class Agent(dbus.service.Object):
     def check(self, device):
         print('Żądanie agenta parowania:', device, flush=True)
@@ -204,7 +228,7 @@ class Agent(dbus.service.Object):
         pass
 
 
-def main():
+def main(wake_on_start=False):
     global TARGET
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--target', default=TARGET, required=not TARGET)
@@ -232,6 +256,10 @@ def main():
     advertising = dbus.Interface(proxy, 'org.bluez.LEAdvertisingManager1')
     loop = GLib.MainLoop()
     state = {'gatt': False, 'advert': False, 'failed': False}
+    wake_advert = WakeAdvertisement(bus)
+    wake_session = WakeSession(advertising, wake_advert, GLib.timeout_add_seconds,
+                               GLib.source_remove, lambda message: print(message, flush=True))
+    wake_advert.session = wake_session
 
     def failed(error):
         print('BŁĄD BlueZ:', error, flush=True)
@@ -240,6 +268,8 @@ def main():
 
     def advertised():
         state['advert'] = True
+        if wake_on_start:
+            GLib.idle_add(command, 'wake')
         print(f'GOTOWE: wybierz „{DEVICE_NAME}” w Dodaj akcesorium na Mi Boxie.', flush=True)
         print('Polecenia: up down left right ok back home power vol+ vol- mute play wake status quit', flush=True)
 
@@ -251,27 +281,10 @@ def main():
         if line == 'quit':
             loop.quit()
         elif line == 'wake':
-            if state.get('waking'):
-                print('Wybudzanie już trwa.', flush=True)
-                return False
             if app.target_connected:
-                print('Poczekaj na rozłączenie Bluetooth po uśpieniu.', flush=True)
-                return False
-            state['waking'] = True
-            advertising.UnregisterAdvertisement(advert.path)
-            state['advert'] = False
-            def resume(result):
-                state['waking'] = False
-                print('Nadajnik wybudzania zakończony:', result, flush=True)
-                advertising.RegisterAdvertisement(advert.path, {}, reply_handler=advertised, error_handler=failed)
-                return False
-            def wake_worker():
-                try:
-                    result = subprocess.call(['pkexec', '/usr/bin/python3', str(Path(__file__).with_name('wake_captured.py').resolve()), '--target', TARGET])
-                except OSError as error:
-                    result = str(error)
-                GLib.idle_add(resume, result)
-            threading.Thread(target=wake_worker, daemon=True).start()
+                print('Box ma połączenie Bluetooth; wake nie jest potrzebne.', flush=True)
+            elif not wake_session.start():
+                print('Wybudzanie już trwa.', flush=True)
         elif line == 'status':
             print('HID pilot:', bool(app.target_connected and app.consumer.properties['Notifying']), flush=True)
         else:
@@ -309,6 +322,7 @@ def main():
     try:
         loop.run()
     finally:
+        wake_session.close()
         for active, method, path in [(state['advert'], advertising.UnregisterAdvertisement, advert.path),
                                       (state['gatt'], gatt.UnregisterApplication, ROOT),
                                       (True, manager.UnregisterAgent, agent_path)]:

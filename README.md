@@ -21,9 +21,9 @@ sudo apt install bluez python3 python3-dbus python3-gi policykit-1
 
 Use the system Python so the distribution's D-Bus and GLib modules are available.
 The adapter must support BLE peripheral/GATT server mode and extended HCI
-advertising commands. This version uses `hci0`; use a dedicated adapter with no
-other advertising applications. Raw wake transmission requires administrator
-privileges and temporarily disables controller advertising.
+advertising support with at least two simultaneous advertising instances. This
+version uses `hci0`. Normal control and interactive wake use BlueZ D-Bus; they
+do not require raw-HCI privileges or disable other advertising applications.
 
 ## PnP ID configuration
 
@@ -73,36 +73,45 @@ Wait for the Box to connect and enable report notifications. Terminal commands:
 | `vol+`, `vol-`, `mute`, `play` | Media control |
 | `power` | Send the original Consumer Power usage over Bluetooth; toggles power |
 | `status` | Connection and HID subscription readiness |
-| `wake` | Send the captured advertising wake packet after disconnection |
+| `wake` | Advertise the observed wake fields through BlueZ after disconnection |
 | `quit` | Stop the emulator |
 
 For sleep, type `power` once, wait until the Box disconnects, then type `wake`.
-Keep the emulator running across cycles: wake temporarily unregisters its
-advertisement but preserves GATT and bonded subscription state. `wake` invokes
-`pkexec` for the short raw-HCI transmitter and then restores normal advertising.
-A successful transmitter exit means the controller accepted the commands;
-verify the TV screen to confirm wake.
+Keep the emulator running across cycles: `wake` adds a temporary, connectable
+BlueZ advertisement for 8 seconds while the normal advertisement, GATT and
+bonded subscriptions stay available. BlueZ handles the incoming connection and
+restarts advertising after early connection loss; no Android connect command
+is issued.
+Successful advertisement registration is not an acknowledgement from the Box;
+verify the TV screen or the resumed HID controls to confirm wake.
 
-Standalone wake, with the emulator stopped:
+To start the emulator and wake the Box in one command:
 
 ```sh
-sudo python3 wake_captured.py --target AA:BB:CC:DD:EE:FF
+python3 xiaomi_rc.py --wake --target AA:BB:CC:DD:EE:FF
 ```
+
+The process stays running to serve HID after wake. `wake_captured.py` remains
+an administrator-only diagnostic raw-packet replay tool; it does not provide
+a HID server and is not used by normal wake.
 
 The wake packet was captured from the owner's original remote after the Box
 had disconnected Bluetooth. It contains the last three bytes of the Box's
 Bluetooth MAC in reverse order. See [protocol notes](PROTOCOL.md).
-No ADB is required by the application. Hardware validation used ADB only to
-read status and reconnect a stalled HID profile; power commands were sent via BT.
+No ADB is required by the application. Current automatic-reconnection validation
+used ADB only to read status and input events during the cycles; power and navigation were sent via BT. Earlier
+baseline tests needed a profile-connect helper, as documented in the test notes.
 
 ## Troubleshooting
 
 - `status` is a local readiness indication, not an acknowledgement that Android
   consumed a key. A native HID device may take longer to become available.
-- Recreating the GATT application across wakes can trigger Android service
-  rediscovery and slow or failed HID reconnection. Keep one process running.
-- If necessary, select/connect the saved accessory on the Box. In diagnostics,
-  a stuck HID Host state required restarting Bluetooth and reconnecting.
+- Keep one GATT process running across cycles. Recreating the application can
+  trigger Android service rediscovery; the managed wake path avoids that.
+- If the adapter has no free advertising instance, wake reports a registration
+  error while the normal advertisement and HID server remain available.
+- Automatic recovery is validated only on the hardware listed above. Earlier
+  raw-HCI baseline tests had HID stalls; see the dated validation notes.
 - A fully powered-off/unplugged Box cannot receive Bluetooth wake packets.
 - Microphone, voice search and OTA are intentionally unimplemented.
 - Wake compatibility is device/firmware specific; these tests do not establish

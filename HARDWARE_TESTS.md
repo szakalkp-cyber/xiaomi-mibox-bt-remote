@@ -1,4 +1,36 @@
-# Hardware validation — 2026-10-27
+# Automatic HID reconnection — 2026-10-28
+
+Three consecutive cycles passed on the same hardware and bond, in one emulator
+process using BlueZ-managed wake advertisements. After the initial connection,
+there were no Android/ADB profile-connect calls, Bluetooth restarts, reparing,
+manual accessory selection, or emulator restarts during these three cycles.
+
+| Cycle | Sleep | Wake / automatic HID | Functional input evidence |
+| --- | --- | --- | --- |
+| 1 | Consumer Power over BT; target disconnected | Awake and native laptop HID present | Home DOWN and UP captured on laptop's native consumer input |
+| 2 | Consumer Power over BT; target disconnected | Awake and native laptop HID present | The subsequent Power over BT successfully slept the Box for cycle3 |
+| 3 | Consumer Power over BT; target disconnected | Awake and native laptop HID present | Home DOWN and UP captured on laptop's native consumer input |
+
+ADB was used only for passive power/input reads in these cycles. All sleep,
+wake and navigation actions used Bluetooth. The native HID identity was checked
+against the laptop's Bluetooth address, not just an advertisement or subscription.
+A15-second input-event collector in cycle2 exceeded its ADB read timeout; that
+capture is not claimed as Home evidence. The subsequent BT Power action verified
+that HID controls had resumed. This collector timeout did not trigger reconnection.
+
+The new path leaves normal advertising and GATT registered, adds a temporary
+connectable wake advertisement for8seconds, and lets BlueZ handle connection
+loss/retry. The Box can still drop its first connection during resume, but the
+subsequent connection recovered automatically in the tested cycles.
+
+Ten automated protocol/lifecycle tests pass, including duplicate wakes,
+registration failure, timer cancellation, late callbacks on shutdown, BlueZ
+release, and unregister failure cleanup. Compatibility beyond the tested device
+and adapter is unverified; three cycles do not establish long-term reliability.
+
+---
+
+# Earlier baseline validation — 2026-10-27
 
 Tested on Ubuntu, BlueZ 5.85, Python 3.14, Intel Bluetooth hci0; Android 14
 MiTV-AFMU0 / Amlogic s7d, with a Xiaomi RC 2717:32b9 GATT snapshot.

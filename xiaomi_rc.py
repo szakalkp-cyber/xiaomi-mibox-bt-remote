@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
 """Mirror the owner's captured Xiaomi RC GATT identity and HID profile.
 
-Microphone/OTA are not implemented. --wake replays the captured wake packet
-after stopping the GATT emulator. Address and bond keys are not copied.
+Microphone/OTA are not implemented. --wake starts the HID server and its
+BlueZ-managed wake advertisement. Address and bond keys are not copied.
 """
 import json
-import argparse
 import sys
-import os
-import subprocess
 from pathlib import Path
 import dbus
 import dbus.service
@@ -111,16 +108,9 @@ class SnapshotAdvertisement(base.Node):
 
 def main():
     global SETUP_MODE
-    if '--wake' in sys.argv:
-        helper = str(Path(__file__).with_name('wake_captured.py').resolve())
-        parser = argparse.ArgumentParser(description='Wake Mi Box over Bluetooth')
-        parser.add_argument('--wake', action='store_true')
-        parser.add_argument('--target', default=os.environ.get('MIBOX_BT_ADDRESS'), required=not os.environ.get('MIBOX_BT_ADDRESS'))
-        args = parser.parse_args()
-        command = ['/usr/bin/python3', helper, '--target', args.target]
-        if os.geteuid() != 0:
-            command.insert(0, 'pkexec')
-        raise SystemExit(subprocess.call(command))
+    wake_on_start = '--wake' in sys.argv
+    if wake_on_start:
+        sys.argv.remove('--wake')
     if '--setup' in sys.argv:
         SETUP_MODE = True
         sys.argv.remove('--setup')
@@ -135,7 +125,7 @@ def main():
         properties.Set('org.bluez.Adapter1', 'Alias', dbus.String(base.DEVICE_NAME))
         print('Profil odczytanego Xiaomi RC; adres laptopa pozostaje adresem adaptera.', flush=True)
         print('Wybudzanie po rozłączeniu: wpisz wake. Osobny nadajnik: xiaomi_rc.py --wake --target ADRES_BT. Głos i OTA nie są obsługiwane.', flush=True)
-        base.main()
+        base.main(wake_on_start=wake_on_start)
     finally:
         properties.Set('org.bluez.Adapter1', 'Alias', old_alias)
 
