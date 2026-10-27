@@ -1,3 +1,27 @@
+# Home Assistant MQTT integration — 2026-10-28
+
+Validated on the owner's Home Assistant OS VM, with the Bluetooth bridge running
+as a user-systemd service on the Linux host and the existing local MQTT broker.
+Home Assistant automatically created one device with13 buttons and a connectivity
+sensor. The integration was confirmed in the actual Home Assistant device UI.
+
+An end-to-end UI test passed: Bluetooth Power from the Home Assistant button
+slept the Box, the HID-only buttons became unavailable while Wake stayed
+available, and pressing Wake resumed the Box and restored native HID controls
+automatically. No Android profile-connect command was issued during that cycle.
+Home DOWN/UP was captured on the laptop's native consumer device after a Home
+Assistant Home button press, including after wake. ADB was read-only during
+validation; all control and power commands used MQTT → Linux bridge → Bluetooth.
+A one-time profile connect was used after installing/restarting the bridge before
+starting the end-to-end sleep/wake cycle, as in the documented initial setup.
+
+Seventeen unit tests pass, covering the Bluetooth protocol/lifecycle and MQTT
+Discovery, availability, Last Will, birth/reconnect, private configuration and
+retained/duplicate/invalid command rejection. Runtime configuration and broker
+credentials are outside this repository and were not published.
+
+---
+
 # Automatic HID reconnection — 2026-10-28
 
 Three consecutive cycles passed on the same hardware and bond, in one emulator

@@ -1,0 +1,13 @@
+[Unit]
+Description=Mi Box Bluetooth remote for Home Assistant
+
+[Service]
+Type=simple
+WorkingDirectory=%h/.local/share/mibox-bt-remote
+ExecStart=%h/.local/share/mibox-bt-remote/.venv/bin/python xiaomi_rc.py --mqtt-config %h/.config/mibox-bt-remote/config.json
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=10
+
+[Install]
+WantedBy=default.target

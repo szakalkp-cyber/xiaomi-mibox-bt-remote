@@ -1,0 +1,12 @@
+{
+  "target": "AA:BB:CC:DD:EE:FF",
+  "device_id": "mibox_bt_remote",
+  "name": "Mi Box Bluetooth",
+  "mqtt": {
+    "host": "127.0.0.1",
+    "port": 1883,
+    "username": "YOUR_MQTT_USER",
+    "password": "YOUR_MQTT_PASSWORD",
+    "tls": false
+  }
+}

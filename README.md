@@ -4,6 +4,13 @@ Experimental Python/BlueZ remote with a captured Xiaomi RC GATT profile and a
 Bluetooth advertising wake mechanism. The laptop keeps its own Bluetooth address
 and pairing keys. This is an independent project, unaffiliated with Xiaomi.
 
+## Home Assistant
+
+Use the [Home Assistant MQTT integration](HOME_ASSISTANT.md) to expose wake,
+Bluetooth Power, navigation/media buttons and connection status. The bridge
+runs on the Linux Bluetooth host, including when Home Assistant is in a VM.
+Real credentials and the Box address stay in a private local config file.
+
 ## Tested hardware
 
 Ubuntu laptop with Intel Bluetooth, BlueZ 5.85 and Python 3.14; Android 14

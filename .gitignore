@@ -8,3 +8,7 @@ __pycache__/
 *.zip
 adbkey*
 work/
+
+mqtt-config.json
+*-private.json
+.venv/

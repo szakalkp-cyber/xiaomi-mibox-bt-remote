@@ -231,9 +231,17 @@ class Agent(dbus.service.Object):
 def main(wake_on_start=False):
     global TARGET
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--target', default=TARGET, required=not TARGET)
+    parser.add_argument('--target', default=TARGET)
+    parser.add_argument('--mqtt-config', help='Private owner-only JSON config; run as a Home Assistant MQTT bridge')
     args = parser.parse_args()
     import re
+    mqtt_options = None
+    if args.mqtt_config:
+        from mqtt_bridge import load_config
+        mqtt_options = load_config(args.mqtt_config)
+        args.target = args.target or mqtt_options['target']
+    if not args.target:
+        parser.error('--target or --mqtt-config is required')
     if not re.fullmatch(r'(?:[0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}', args.target):
         parser.error('Niepoprawny adres MAC')
     TARGET = args.target.upper()
@@ -271,7 +279,10 @@ def main(wake_on_start=False):
         if wake_on_start:
             GLib.idle_add(command, 'wake')
         print(f'GOTOWE: wybierz „{DEVICE_NAME}” w Dodaj akcesorium na Mi Boxie.', flush=True)
-        print('Polecenia: up down left right ok back home power vol+ vol- mute play wake status quit', flush=True)
+        if mqtt_options:
+            print('Tryb Home Assistant MQTT: polecenia są odbierane z brokera.', flush=True)
+        else:
+            print('Polecenia: up down left right ok back home power vol+ vol- mute play wake status quit', flush=True)
 
     def registered():
         state['gatt'] = True
@@ -316,12 +327,31 @@ def main(wake_on_start=False):
     bus.add_signal_receiver(changed, dbus_interface=PROPS, signal_name='PropertiesChanged', path_keyword='path')
     bus.add_signal_receiver(added, dbus_interface=OM, signal_name='InterfacesAdded')
     gatt.RegisterApplication(ROOT, {}, reply_handler=registered, error_handler=failed)
-    threading.Thread(target=read_input, daemon=True).start()
     GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGINT, lambda: (loop.quit(), False)[1])
     GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGTERM, lambda: (loop.quit(), False)[1])
+    bridge = None
+    mqtt_timer = None
     try:
+        if mqtt_options:
+            from mqtt_bridge import MqttBridge
+            bridge = MqttBridge(mqtt_options, lambda key: GLib.idle_add(command, key),
+                                lambda message: print(message, flush=True))
+            def update_mqtt():
+                bridge.update_state(app.target_connected,
+                    app.target_connected and app.consumer.properties['Notifying'],
+                    wake_session.phase in ('registering', 'advertising'))
+                return True
+            update_mqtt()
+            bridge.start()
+            mqtt_timer = GLib.timeout_add_seconds(2, update_mqtt)
+        else:
+            threading.Thread(target=read_input, daemon=True).start()
         loop.run()
     finally:
+        if mqtt_timer is not None:
+            GLib.source_remove(mqtt_timer)
+        if bridge is not None:
+            bridge.stop()
         wake_session.close()
         for active, method, path in [(state['advert'], advertising.UnregisterAdvertisement, advert.path),
                                       (state['gatt'], gatt.UnregisterApplication, ROOT),
