@@ -1,0 +1,713 @@
+{
+  "reason": "merged_read_only_profile",
+  "services": [
+    {
+      "uuid": "00001800-0000-1000-8000-00805f9b34fb",
+      "type": 0,
+      "characteristics": [
+        {
+          "uuid": "00002a00-0000-1000-8000-00805f9b34fb",
+          "instance": 3,
+          "properties": 18,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "5869616f6d69205243"
+        },
+        {
+          "uuid": "00002a01-0000-1000-8000-00805f9b34fb",
+          "instance": 5,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "0000"
+        },
+        {
+          "uuid": "00002a04-0000-1000-8000-00805f9b34fb",
+          "instance": 7,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "0800080063009001"
+        },
+        {
+          "uuid": "00002aa6-0000-1000-8000-00805f9b34fb",
+          "instance": 9,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "01"
+        }
+      ]
+    },
+    {
+      "uuid": "00001801-0000-1000-8000-00805f9b34fb",
+      "type": 0,
+      "characteristics": [
+        {
+          "uuid": "00002a05-0000-1000-8000-00805f9b34fb",
+          "instance": 12,
+          "properties": 32,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "uuid": "0000180f-0000-1000-8000-00805f9b34fb",
+      "type": 0,
+      "characteristics": [
+        {
+          "uuid": "00002a19-0000-1000-8000-00805f9b34fb",
+          "instance": 16,
+          "properties": 18,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0000"
+            }
+          ],
+          "read_status": 0,
+          "value": "32"
+        }
+      ]
+    },
+    {
+      "uuid": "0000180a-0000-1000-8000-00805f9b34fb",
+      "type": 0,
+      "characteristics": [
+        {
+          "uuid": "00002a29-0000-1000-8000-00805f9b34fb",
+          "instance": 20,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "54454c494e4b20546563682e00"
+        },
+        {
+          "uuid": "00002a24-0000-1000-8000-00805f9b34fb",
+          "instance": 22,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "464830303500"
+        },
+        {
+          "uuid": "00002a25-0000-1000-8000-00805f9b34fb",
+          "instance": 24,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "73657269616c00"
+        },
+        {
+          "uuid": "00002a27-0000-1000-8000-00805f9b34fb",
+          "instance": 26,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "302e302e302e3100"
+        },
+        {
+          "uuid": "00002a26-0000-1000-8000-00805f9b34fb",
+          "instance": 28,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "302e302e302e3100"
+        },
+        {
+          "uuid": "00002a28-0000-1000-8000-00805f9b34fb",
+          "instance": 30,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "642e372e302e3900"
+        },
+        {
+          "uuid": "00002a23-0000-1000-8000-00805f9b34fb",
+          "instance": 32,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "0000000000000000"
+        },
+        {
+          "uuid": "00002a2a-0000-1000-8000-00805f9b34fb",
+          "instance": 34,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "00000000000000"
+        },
+        {
+          "uuid": "00002a50-0000-1000-8000-00805f9b34fb",
+          "instance": 36,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "011727b93209d7"
+        }
+      ]
+    },
+    {
+      "uuid": "00001812-0000-1000-8000-00805f9b34fb",
+      "type": 0,
+      "characteristics": [
+        {
+          "uuid": "00002a4a-0000-1000-8000-00805f9b34fb",
+          "instance": 39,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "00000001"
+        },
+        {
+          "uuid": "00002a4c-0000-1000-8000-00805f9b34fb",
+          "instance": 41,
+          "properties": 4,
+          "descriptors": []
+        },
+        {
+          "uuid": "00002a4e-0000-1000-8000-00805f9b34fb",
+          "instance": 43,
+          "properties": 6,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "01"
+        },
+        {
+          "uuid": "00002a4b-0000-1000-8000-00805f9b34fb",
+          "instance": 45,
+          "properties": 2,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "050c0901a101050c0901a1018501950375101500269c0219002a9c028100c005010906a101850295037510151e25370507191e29378100c00600ff0900a101850675089578150025ff190029ff8100850775089578150025ff190029ff8100850875089578150025ff190029ff8100c0c0"
+        },
+        {
+          "uuid": "00002a22-0000-1000-8000-00805f9b34fb",
+          "instance": 47,
+          "properties": 26,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0000"
+            }
+          ],
+          "read_status": 0,
+          "value": "00"
+        },
+        {
+          "uuid": "00002a32-0000-1000-8000-00805f9b34fb",
+          "instance": 50,
+          "properties": 14,
+          "descriptors": [],
+          "read_status": 0,
+          "value": "00"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 52,
+          "properties": 26,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0000"
+            },
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0101"
+            }
+          ],
+          "read_status": 0,
+          "value": "0000"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 56,
+          "properties": 26,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0000"
+            },
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0201"
+            }
+          ],
+          "read_status": 0,
+          "value": "0000000000000000"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 60,
+          "properties": 14,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0202"
+            }
+          ],
+          "read_status": 0,
+          "value": "00"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 63,
+          "properties": 26,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0000"
+            },
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0301"
+            }
+          ],
+          "read_status": 0,
+          "value": "00"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 67,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0402"
+            }
+          ],
+          "read_status": 0,
+          "value": "0000000000000000000000000000000000000000"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 70,
+          "properties": 26,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0000"
+            },
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0501"
+            }
+          ],
+          "read_status": 0,
+          "value": "0000"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 74,
+          "properties": 26,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0000"
+            },
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0601"
+            }
+          ],
+          "read_status": 0,
+          "value": "00"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 78,
+          "properties": 26,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0000"
+            },
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0701"
+            }
+          ],
+          "read_status": 0,
+          "value": "00"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 82,
+          "properties": 26,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0000"
+            },
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0801"
+            }
+          ],
+          "read_status": 0,
+          "value": "00"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 86,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0902"
+            }
+          ],
+          "read_status": 0,
+          "value": "00"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 89,
+          "properties": 18,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0000"
+            },
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0a03"
+            }
+          ],
+          "read_status": 0,
+          "value": "00"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 93,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "e003"
+            }
+          ],
+          "read_status": 0,
+          "value": "271732b9d7093219a0240000"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 96,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "e103"
+            }
+          ],
+          "read_status": 0,
+          "value": "0000001c0014"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 99,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "e203"
+            }
+          ],
+          "read_status": 0,
+          "value": "0000000000000000000000000000000000000000"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 102,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "e303"
+            }
+          ],
+          "read_status": 0,
+          "value": "00"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 105,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "e403"
+            }
+          ],
+          "read_status": 0,
+          "value": "000001"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 108,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "e503"
+            }
+          ],
+          "read_status": 0,
+          "value": "0000"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 111,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "e603"
+            }
+          ],
+          "read_status": 0,
+          "value": "00"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 114,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "e703"
+            }
+          ],
+          "read_status": 0,
+          "value": "0000"
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 117,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "e803"
+            }
+          ],
+          "value": "01000000000400000000100001",
+          "read_status": 0
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 120,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "e903"
+            }
+          ],
+          "value": "0000",
+          "read_status": 0
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 123,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "value": "ea03",
+              "source": "Earlier original-pilot HCI capture, handle 0x007c"
+            }
+          ]
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 126,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "eb03"
+            }
+          ],
+          "value": "000050",
+          "read_status": 0
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 129,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "ec03"
+            }
+          ],
+          "value": "0000",
+          "read_status": 0
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 132,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "ed03"
+            }
+          ],
+          "value": "01",
+          "read_status": 0
+        },
+        {
+          "uuid": "00002a4d-0000-1000-8000-00805f9b34fb",
+          "instance": 135,
+          "properties": 10,
+          "descriptors": [
+            {
+              "uuid": "00002908-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "ee03"
+            }
+          ],
+          "value": "0000",
+          "read_status": 0
+        }
+      ]
+    },
+    {
+      "uuid": "0000a00a-0000-1000-8000-00805f9b34fb",
+      "type": 0,
+      "characteristics": [
+        {
+          "uuid": "0000b005-0000-1000-8000-00805f9b34fb",
+          "instance": 139,
+          "properties": 6,
+          "descriptors": [],
+          "value": "0000",
+          "read_status": 0
+        },
+        {
+          "uuid": "0000c001-0000-1000-8000-00805f9b34fb",
+          "instance": 141,
+          "properties": 6,
+          "descriptors": [],
+          "value": "0000",
+          "read_status": 0
+        }
+      ]
+    },
+    {
+      "uuid": "00010203-0405-0607-0809-0a0b0c0d1912",
+      "type": 0,
+      "characteristics": [
+        {
+          "uuid": "00010203-0405-0607-0809-0a0b0c0d2b12",
+          "instance": 144,
+          "properties": 22,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0000"
+            },
+            {
+              "uuid": "00002901-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "4f5441"
+            }
+          ],
+          "value": "00",
+          "read_status": 0
+        }
+      ]
+    },
+    {
+      "uuid": "ab5e0001-5a21-4f05-bc7d-af01f617b664",
+      "type": 0,
+      "characteristics": [
+        {
+          "uuid": "ab5e0002-5a21-4f05-bc7d-af01f617b664",
+          "instance": 149,
+          "properties": 22,
+          "descriptors": [],
+          "value": "0000000000000000000000000000000000000000",
+          "read_status": 0
+        },
+        {
+          "uuid": "ab5e0003-5a21-4f05-bc7d-af01f617b664",
+          "instance": 151,
+          "properties": 18,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0100"
+            }
+          ],
+          "value": "00",
+          "read_status": 0
+        },
+        {
+          "uuid": "ab5e0004-5a21-4f05-bc7d-af01f617b664",
+          "instance": 154,
+          "properties": 18,
+          "descriptors": [
+            {
+              "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+              "read_status": 0,
+              "value": "0100"
+            }
+          ],
+          "value": "00",
+          "read_status": 0
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Characteristic instance 123 (HID feature report EA) returned status 133 and no value.",
+    "Characteristic properties do not expose the original attribute security permissions.",
+    "Captured GATT data does not implement microphone, firmware update, or hidden controller wake logic."
+  ]
+}
